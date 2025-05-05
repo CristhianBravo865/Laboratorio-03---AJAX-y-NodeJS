@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Markdown a HTML</title>
+</head>
+<body>
+  <h1>Conversor Markdown</h1>
+  <form id="markupForm">
+    <textarea id="markupText" rows="10" cols="50" placeholder="Escribe tu markdown aquí..."></textarea><br>
+    <button type="submit">Convertir</button>
+  </form>
+  <h2>Resultado:</h2>
+  <div id="htmlCode" style="border: 1px solid #ccc; padding: 10px;"></div>
+
+  <script>
+    function recitar(markupText) {
+      const url = 'http://localhost:3000/';
+      const data = { text: markupText };
+
+      const request = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      };
+
+      fetch(url, request)
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector("#htmlCode").innerHTML = data.text;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const text = document.querySelector('#markupText');
+      document.querySelector('#markupForm').onsubmit = () => {
+        recitar(text.value);
+        return false;
+      };
+    });
+  </script>
+</body>
+</html>
