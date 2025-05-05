@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Poema AJAX</title>
+</head>
+<body>
+  <h1>Recitar poema</h1>
+  <button onclick="recitar()">Mostrar poema</button>
+  <p id="poema"></p>
+
+  <script>
+    function recitar() {
+      fetch('/recitar')
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector("#poema").innerHTML = data.text;
+        });
+    }
+  </script>
+</body>
+</html>
