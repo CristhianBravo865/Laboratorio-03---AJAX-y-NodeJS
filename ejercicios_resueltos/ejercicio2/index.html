@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX con Fetch</title>
+</head>
+<body>
+  <h1>Prueba de AJAX</h1>
+  <button onclick="hacerPeticion()">Haz clic para obtener mensaje</button>
+  <p id="resultado"></p>
+
+  <script>
+    function hacerPeticion() {
+      fetch('/mensaje')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('resultado').innerText = data.mensaje;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+  </script>
+</body>
+</html>
