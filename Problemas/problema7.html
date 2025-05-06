@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Problema 7 - Comparación entre Regiones</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="problema7.js" defer></script>
+</head>
+
+<body>
+  <h1>Problema 7 - Comparación entre Regiones seleccionadas por el usuario</h1>
+
+  <label for="regiones">Seleccione una o más regiones:</label><br>
+  <select id="regiones" multiple>
+    <option data-region="Amazonas">Amazonas</option>
+    <option data-region="Ancash">Áncash</option>
+    <option data-region="Apurimac">Apurímac</option>
+    <option data-region="Arequipa">Arequipa</option>
+    <option data-region="Ayacucho">Ayacucho</option>
+    <option data-region="Cajamarca">Cajamarca</option>
+    <option data-region="Callao">Callao</option>
+    <option data-region="Cusco">Cusco</option>
+    <option data-region="Huancavelica">Huancavelica</option>
+    <option data-region="Huanuco">Huánuco</option>
+    <option data-region="Ica">Ica</option>
+    <option data-region="Junin">Junín</option>
+    <option data-region="La Libertad">La Libertad</option>
+    <option data-region="Lambayeque">Lambayeque</option>
+    <option data-region="Lima">Lima</option>
+    <option data-region="Loreto">Loreto</option>
+    <option data-region="Madre de Dios">Madre de Dios</option>
+    <option data-region="Moquegua">Moquegua</option>
+    <option data-region="Pasco">Pasco</option>
+    <option data-region="Piura">Piura</option>
+    <option data-region="Puno">Puno</option>
+    <option data-region="San Martin">San Martín</option>
+    <option data-region="Tacna">Tacna</option>
+    <option data-region="Tumbes">Tumbes</option>
+    <option data-region="Ucayali">Ucayali</option>
+  </select> <br><br>
+
+  <button id="generar">Generar Gráfico</button>
+
+  <div id="grafico" style="width: 100%; height: 600px; margin-top: 30px;"></div>
+</body>
+
+</html>
