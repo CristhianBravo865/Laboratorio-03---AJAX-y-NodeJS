@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AJAX XMLHTTP</title>
+</head>
+
+<body>
+
+    <h2>Ejemplo 1</h2>
+    <button onclick="ejemplo1()">Ejecutar</button>
+    <p id="demo1"></p>
+    <script>
+        function ejemplo1() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById("demo1").innerHTML = this.responseText;
+            }
+            xhttp.open("GET", "ajax_info.txt");
+            xhttp.send();
+        }
+    </script>
+
+    <h2>Ejemplo 2</h2>
+    <button onclick="ejemplo2('ajax_info.txt', funcion1)">Función 1</button>
+    <button onclick="ejemplo2('ajax_info.txt', funcion2)">Función 2</button>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+    <script>
+        function ejemplo2(url, cFunction) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () { cFunction(this); }
+            xhttp.open("GET", url);
+            xhttp.send();
+        }
+        function funcion1(xhttp) {
+            document.getElementById("demo2").innerHTML = "Función 1: " + xhttp.responseText;
+        }
+        function funcion2(xhttp) {
+            document.getElementById("demo3").innerHTML = "Función 2: " + xhttp.responseText;
+        }
+    </script>
+
+    <h2>Ejemplo 3</h2>
+    <button onclick="ejemplo3()">Usando readyState</button>
+    <p id="demo4"></p>
+    <script>
+        function ejemplo3() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo4").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "ajax_info.txt");
+            xhttp.send();
+        }
+    </script>
+
+</body>
+
+</html>
