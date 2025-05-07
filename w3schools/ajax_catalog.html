@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CD Catalog</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+    }
+    tr:hover {
+      background-color: #f0f0f0;
+      cursor: pointer;
+    }
+    #controls {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Catálogo de CDs (XML + JavaScript)</h2>
+
+<button onclick="loadXMLDoc()">Cargar Catálogo</button>
+<div id="controls">
+  <button onclick="previous()">Anterior</button>
+  <button onclick="next()">Siguiente</button>
+</div>
+
+<h3>Información del CD</h3>
+<div id="showCD">Haz clic en un CD o navega con los botones.</div>
+
+<h3>Lista completa</h3>
+<table id="demo"></table>
+
+<script>
+let cdList = [];
+let i = 0;
+
+function loadXMLDoc() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    const xmlDoc = xhttp.responseXML;
+    cdList = xmlDoc.getElementsByTagName("CD");
+    displayCD(i);
+    buildTable(cdList);
+  };
+  xhttp.open("GET", "cd_catalog.xml");
+  xhttp.send();
+}
+
+function displayCD(index) {
+  if (!cdList.length) return;
+  const cd = cdList[index];
+  document.getElementById("showCD").innerHTML =
+    "<strong>Artist:</strong> " + getText(cd, "ARTIST") + "<br>" +
+    "<strong>Title:</strong> " + getText(cd, "TITLE") + "<br>" +
+    "<strong>Year:</strong> " + getText(cd, "YEAR");
+}
+
+function buildTable(cdArray) {
+  let table = "<tr><th>Artist</th><th>Title</th></tr>";
+  for (let j = 0; j < cdArray.length; j++) {
+    table += "<tr onclick='displayCD(" + j + ")'><td>" +
+      getText(cdArray[j], "ARTIST") + "</td><td>" +
+      getText(cdArray[j], "TITLE") + "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+function getText(cd, tag) {
+  const elem = cd.getElementsByTagName(tag)[0];
+  return elem && elem.childNodes.length > 0 ? elem.childNodes[0].nodeValue : "";
+}
+
+function next() {
+  if (i < cdList.length - 1) {
+    i++;
+    displayCD(i);
+  }
+}
+
+function previous() {
+  if (i > 0) {
+    i--;
+    displayCD(i);
+  }
+}
+</script>
+
+</body>
+</html>
