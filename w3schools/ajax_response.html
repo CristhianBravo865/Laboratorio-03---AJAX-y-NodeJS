@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AJAX Server Response Test</title>
+</head>
+
+<body>
+
+    <h2>AJAX Server Response</h2>
+
+    <div id="demo">Presiona un botón para hacer una solicitud AJAX</div>
+
+    <br>
+
+    <button onclick="loadText()">Cargar responseText</button>
+    <button onclick="loadXML()">Cargar responseXML</button>
+    <button onclick="loadAllHeaders()">getAllResponseHeaders()</button>
+    <button onclick="loadSpecificHeader()">getResponseHeader()</button>
+
+    <script>
+        function loadText() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById("demo").innerHTML = xhttp.responseText;
+            }
+            xhttp.open("GET", "ajax_info.txt");
+            xhttp.send();
+        }
+
+        function loadXML() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                const xmlDoc = xhttp.responseXML;
+                const x = xmlDoc.getElementsByTagName("ARTIST");
+
+                let txt = "";
+                for (let i = 0; i < x.length; i++) {
+                    txt += x[i].childNodes[0].nodeValue + "<br>";
+                }
+                document.getElementById("demo").innerHTML = txt;
+            }
+            xhttp.open("GET", "cd_catalog.xml");
+            xhttp.send();
+        }
+
+        function loadAllHeaders() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById("demo").innerHTML =
+                    this.getAllResponseHeaders();
+            }
+            xhttp.open("GET", "ajax_info.txt");
+            xhttp.send();
+        }
+
+        function loadSpecificHeader() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById("demo").innerHTML =
+                    this.getResponseHeader("Last-Modified");
+            }
+            xhttp.open("GET", "ajax_info.txt");
+            xhttp.send();
+        }
+    </script>
+
+</body>
+
+</html>
