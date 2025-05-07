@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AJAX Request Práctica</title>
+</head>
+
+<body>
+
+    <h2>GET simple</h2>
+    <button onclick="getSimple()">Ejecutar</button>
+    <p id="demo1"></p>
+    <script>
+        function getSimple() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById("demo1").innerHTML = this.responseText;
+            }
+            xhttp.open("GET", "demo_get.asp");
+            xhttp.send();
+        }
+    </script>
+
+    <h2>GET con parámetro aleatorio</h2>
+    <button onclick="getCacheBypass()">Ejecutar</button>
+    <p id="demo2"></p>
+    <script>
+        function getCacheBypass() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById("demo2").innerHTML = this.responseText;
+            }
+            xhttp.open("GET", "demo_get.asp?t=" + Math.random());
+            xhttp.send();
+        }
+    </script>
+
+    <h2>GET con parámetros</h2>
+    <button onclick="getConParametros()">Ejecutar</button>
+    <p id="demo3"></p>
+    <script>
+        function getConParametros() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById("demo3").innerHTML = this.responseText;
+            }
+            xhttp.open("GET", "demo_get2.asp?fname=Henry&lname=Ford");
+            xhttp.send();
+        }
+    </script>
+
+    <h2>POST simple</h2>
+    <button onclick="postSimple()">Ejecutar</button>
+    <p id="demo4"></p>
+    <script>
+        function postSimple() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById("demo4").innerHTML = this.responseText;
+            }
+            xhttp.open("POST", "demo_post.asp");
+            xhttp.send();
+        }
+    </script>
+
+    <h2>POST con datos</h2>
+    <button onclick="postConDatos()">Ejecutar</button>
+    <p id="demo5"></p>
+    <script>
+        function postConDatos() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById("demo5").innerHTML = this.responseText;
+            }
+            xhttp.open("POST", "ajax_test.asp");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("fname=Henry&lname=Ford");
+        }
+    </script>
+
+    <h2>Síncrono</h2>
+    <button onclick="sincrono()">Ejecutar</button>
+    <p id="demo6"></p>
+    <script>
+        function sincrono() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "ajax_info.txt", false);
+            xhttp.send();
+            document.getElementById("demo6").innerHTML = xhttp.responseText;
+        }
+    </script>
+
+</body>
+
+</html>
